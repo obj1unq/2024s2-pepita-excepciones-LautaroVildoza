@@ -6,12 +6,20 @@ object pepita {
 	}
 	
 	method volar(distancia) {
+		self.validarVolar(distancia)
 		energia = energia - 10 - distancia
+	}
+
+	method validarVolar(distancia) {
+	  if (energia < (10 + distancia)){
+		self.error("La distancia" + distancia + "es muy lejos para su energia")
+	  }
 	}
 		
 	method energia() {
 		return energia
 	}
+
 }
 
 object alpiste {
@@ -53,8 +61,15 @@ object pepon {
 		energia += energia + comida.energiaQueAporta() / 2
 	}
 		
-	method volar(distancia) {
+	method volar(distancia){
+		self.validarVolar(distancia) 
 		energia = energia - 20 - 2*distancia
+	}
+
+	method validarVolar(distancia) {
+	  if( energia <  (20 + 2*distancia)){
+		self.error("La distancia" + distancia + "es muy lejos para su energia")
+	  }
 	}
 	
 }
@@ -71,6 +86,22 @@ object roque {
 	method alimentar(alimento) {
 		ave.comer(alimento)
 		cenas = cenas + 1
+	}
+}
+
+object milena {
+  const aves = #{}
+
+	method ave(_ave) {
+	  aves.add(_ave)
+	}
+
+	method aves() {
+	  return aves
+	}
+
+	method movilizar(distancia) {
+	  aves.forEach({ave => ave.volar(distancia)})
 	}
 }
 
