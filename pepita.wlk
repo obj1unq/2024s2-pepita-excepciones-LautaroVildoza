@@ -58,7 +58,7 @@ object pepon {
 	}
 		
 	method comer(comida) {
-		energia += energia + comida.energiaQueAporta() / 2
+		energia = energia + comida.energiaQueAporta() / 2
 	}
 		
 	method volar(distancia){
@@ -101,7 +101,14 @@ object milena {
 	}
 
 	method movilizar(distancia) {
+		self.validarVolar(distancia)
 	  aves.forEach({ave => ave.volar(distancia)})
+	}
+
+	method validarVolar(distancia) {
+	  if (not aves.all( ave => ave.volar(distancia))){
+		self.error("No puede volar todas")
+	  }
 	}
 }
 
